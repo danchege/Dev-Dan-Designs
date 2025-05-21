@@ -84,20 +84,27 @@ document.addEventListener('DOMContentLoaded', function() {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const formData = new FormData(this);
-            const submitBtn = this.querySelector('button[type="submit"]');
+            const name = this.querySelector('[name="name"]').value;
+            const email = this.querySelector('[name="email"]').value;
+            const subject = this.querySelector('[name="subject"]').value;
+            const message = this.querySelector('[name="message"]').value;
             
-            if (submitBtn) {
-                submitBtn.textContent = 'Sending...';
-                submitBtn.disabled = true;
-                
-                setTimeout(() => {
-                    alert('Thank you for your message! We will get back to you soon.');
-                    contactForm.reset();
-                    submitBtn.textContent = 'Send Message';
-                    submitBtn.disabled = false;
-                }, 1500);
-            }
+            const submitBtn = this.querySelector('button[type="submit"]');
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            // Construct the mailto URL
+            const mailtoUrl = `mailto:danychege28@gmail.com?subject=${encodeURIComponent(subject || 'Contact Form Message')}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+
+            // Open the default email client
+            window.location.href = mailtoUrl;
+
+            // Reset form and button after a short delay
+            setTimeout(() => {
+                contactForm.reset();
+                submitBtn.textContent = 'Send Message';
+                submitBtn.disabled = false;
+            }, 1000);
         });
     }
 });

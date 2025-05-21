@@ -646,7 +646,20 @@ nav {
 .info-item {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.info-item a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+.info-item a:hover {
+    color: var(--primary-color);
 }
 
 .info-item i {
